@@ -1,0 +1,1 @@
+// print out the order of the infered symbols using the algorithm

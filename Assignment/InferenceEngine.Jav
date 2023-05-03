@@ -6,7 +6,7 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logi
 similar to above but has coded examples of the logic we are going to need to make use of
 https://www.freecodecamp.org/news/a-definitive-guide-to-conditional-logic-in-javascript-23fa234d2ca3/
 
-
+THIS IS MAIN
 Requirements
 runs as a batch
 
