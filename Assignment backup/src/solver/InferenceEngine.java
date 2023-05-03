@@ -32,7 +32,8 @@ class InferenceEngine
 		}
 		
 		//Get the puzzle from the file
-		readProblemFile(args[0]);
+		System.out.println(readProblemFile(args[0]));
+		//readProblemFile(args[0]);
 		
 		String method = args[1];
 		CheckingMethod thisMethod = null;
@@ -72,41 +73,48 @@ class InferenceEngine
 		lMethods[2] = new BackwardsChain();
 	}
 	
-	private static void readProblemFile(String fileName) // this allow only one puzzle to be specified in a problem file 
+	private static String readProblemFile(String fileName) // this allow only one puzzle to be specified in a problem file 
 	{
-		
+		String result = "";
 		try
 		{
 			//create file reading objects
 			FileReader reader = new FileReader(fileName);
 			BufferedReader puzzle = new BufferedReader(reader);
-			nPuzzle result;
+			//string result;
+
+			String TELL = puzzle.readLine();
+			String KBinput = puzzle.readLine();
+			String ASK = puzzle.readLine();
+			String checkInput = puzzle.readLine();
 			
-			String puzzleDimension = puzzle.readLine();
-			//split the string by letter "x"
-			String[] bothDimensions = puzzleDimension.split("x");
+			//String puzzleDimension = puzzle.readLine();
+			////split the string by letter "x"
+			//String[] bothDimensions = puzzleDimension.split("x");
 		
-			//work out the "physical" size of the puzzle
-			//here we only deal with NxN puzzles, so the puzzle size is taken to be the first number
-			int puzzleSize = Integer.parseInt(bothDimensions[0]);
-			int puzzleSizeV = Integer.parseInt(bothDimensions[1]);
-			
-			int[][] startPuzzleGrid = new int[puzzleSize][puzzleSizeV];
-			int[][] goalPuzzleGrid = new int[puzzleSize][puzzleSizeV];
-			
-			//fill in the start state
-			String startStateString = puzzle.readLine();
-			startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSize);
-			
-			//fill in the end state
-			String goalStateString = puzzle.readLine();
-			goalPuzzleGrid = ParseStateString(goalStateString, goalPuzzleGrid, puzzleSize);
-			
-			//create the nPuzzle object...
-			result = new nPuzzle(startPuzzleGrid, goalPuzzleGrid);
+			////work out the "physical" size of the puzzle
+			////here we only deal with NxN puzzles, so the puzzle size is taken to be the first number
+			//int puzzleSize = Integer.parseInt(bothDimensions[0]);
+			//int puzzleSizeV = Integer.parseInt(bothDimensions[1]);
+			//
+			//int[][] startPuzzleGrid = new int[puzzleSize][puzzleSizeV];
+			//int[][] goalPuzzleGrid = new int[puzzleSize][puzzleSizeV];
+			//
+			////fill in the start state
+			//String startStateString = puzzle.readLine();
+			//startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSize);
+			//
+			////fill in the end state
+			//String goalStateString = puzzle.readLine();
+			//goalPuzzleGrid = ParseStateString(goalStateString, goalPuzzleGrid, puzzleSize);
+			//
+			////create the nPuzzle object...
+			//result = new nPuzzle(startPuzzleGrid, goalPuzzleGrid);
+
+			result = TELL + KBinput + ASK + checkInput;
 						
 			puzzle.close();
-			return result;
+			
 		}
 		catch(FileNotFoundException ex)
 		{
@@ -122,6 +130,7 @@ class InferenceEngine
 			System.out.println("If you're accessing this file over a network, try making a local copy.");
 			System.exit(1);
 		}
+		return result;
 	}
 	
 	private static int[][] ParseStateString(String stateString, int[][] puzzleGrid, int pWidth)

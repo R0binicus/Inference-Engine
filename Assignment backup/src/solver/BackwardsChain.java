@@ -11,7 +11,7 @@ public class BackwardsChain extends CheckingMethod {
 	
 	@Override
 	public void Solve() {
-		System.out.println("The truth table just ran succesfully!");
+		System.out.println("The backward chain just ran succesfully!");
 	}
 }
 
