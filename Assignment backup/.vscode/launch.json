@@ -11,7 +11,7 @@
             "request": "launch",
             "args": 
             [
-                "N-puzzle-test.txt", "ASS"
+                "test_genericKB.txt", "TT"
             ], 
             "mainClass": "${file}"
         },
