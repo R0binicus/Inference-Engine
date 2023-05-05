@@ -5,10 +5,13 @@
 // https://www.geeksforgeeks.org/system-out-println-in-java/
 // https://www.geeksforgeeks.org/difference-between-print-and-println-in-java/
 
+package solver;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class Reader {
     List<string> _horn;
