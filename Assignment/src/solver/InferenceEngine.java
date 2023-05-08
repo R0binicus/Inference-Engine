@@ -82,68 +82,63 @@ class InferenceEngine
 			//create file reading objects
 			FileReader reader = new FileReader(fileName);
 			BufferedReader puzzle = new BufferedReader(reader);
-			//string result;
 
-			List<String> TELLList;// = new ArrayList<>();
+			String TELL = puzzle.readLine();
+			String KBinput = puzzle.readLine();
+			String ASK = puzzle.readLine();
+			String checkInput = puzzle.readLine();
 
-			String KBinput = null;
-			String checkInput = null;
-			int i = 100;
-			String currentLine;
-			while(i > 0)
-			{
-				i++;
-				currentLine = puzzle.readLine();//.trim();
-				if (currentLine == "TELL" && KBinput != null)
-				{
-					KBinput = puzzle.readLine();
-					//TELLList = ParseTell(KBinput);
-				}
+			//result = TELL + KBinput + ASK + checkInput;
+			//			
+			//puzzle.close();
 
-				if (currentLine == "ASK" && checkInput != null)
-				{
-					checkInput = puzzle.readLine().trim();
-				}
-			}
-
-			
-			//String TELL = puzzle.readLine();
-			//String ASK = puzzle.readLine();
-
-			if (KBinput != null && checkInput != null)
-			{
-				//
-			}
-			else 
-			{
-				System.out.println("Could not find TELL or ASK line, please reformat the file");
-				System.exit(1);
-			}
-			
-			//String puzzleDimension = puzzle.readLine();
-			////split the string by letter "x"
-			//String[] bothDimensions = puzzleDimension.split("x");
-		
-			////work out the "physical" size of the puzzle
-			////here we only deal with NxN puzzles, so the puzzle size is taken to be the first number
-			//int puzzleSize = Integer.parseInt(bothDimensions[0]);
-			//int puzzleSizeV = Integer.parseInt(bothDimensions[1]);
+			//List<String> TELLList;// = new ArrayList<>();
+//
+			//String KBinput = null;
+			//String checkInput = null;
+			//int i = 100;
+			//String currentLine = puzzle.readLine().trim();
+//
+			//while (currentLine != null) 
+			//{
+			//	String TELL = "TELL";
+			//	currentLine = currentLine.trim();
+			//	System.out.println(currentLine);
+			//	if (currentLine == TELL)// && currentLine != null)
+			//	{
+			//		KBinput = puzzle.readLine();
+			//		//TELLList = ParseTell(KBinput);
+			//		System.out.println(KBinput);
+			//	}
+			//	else
+			//	{
+			//		System.out.println(TELL.length());
+			//		System.out.println(currentLine.length());
+			//	}
+//
+			//	if (currentLine == "ASK")// && currentLine != null)
+			//	{
+			//		checkInput = puzzle.readLine().trim();
+			//		System.out.println(checkInput);
+			//	}
+			//	currentLine = puzzle.readLine();
+			//}
+//
 			//
-			//int[][] startPuzzleGrid = new int[puzzleSize][puzzleSizeV];
-			//int[][] goalPuzzleGrid = new int[puzzleSize][puzzleSizeV];
-			//
-			////fill in the start state
-			//String startStateString = puzzle.readLine();
-			//startPuzzleGrid = ParseStateString(startStateString, startPuzzleGrid, puzzleSize);
-			//
-			////fill in the end state
-			//String goalStateString = puzzle.readLine();
-			//goalPuzzleGrid = ParseStateString(goalStateString, goalPuzzleGrid, puzzleSize);
-			//
-			////create the nPuzzle object...
-			//result = new nPuzzle(startPuzzleGrid, goalPuzzleGrid);
+			////String TELL = puzzle.readLine();
+			////String ASK = puzzle.readLine();
+//
+			//if (KBinput != null && checkInput != null)
+			//{
+			//	//
+			//}
+			//else 
+			//{
+			//	System.out.println("Could not find TELL or ASK line, please reformat the file");
+			//	System.exit(1);
+			//}
 
-			result = KBinput + checkInput;
+			result = KBinput + "         " + checkInput;
 						
 			puzzle.close();
 			
@@ -176,36 +171,5 @@ class InferenceEngine
 		 }
 		
 		return TELLList;
-	}
-	
-	private static int[][] ParseStateString(String stateString, int[][] puzzleGrid, int pWidth)
-	{
-		//Parse state string converts the text file's format for each puzzle into
-		// multidimensional arrays.
-		
-		//split the string by spaces
-		String[] tileLocations = stateString.split(" ");
-		
-		// the top-left corner of the puzzle has a coordinate of [0,0]
-		int x = 0;	
-		int y = 0;
-		
-		for(int i = 0; i < tileLocations.length; i++)
-		{
-			//tileLocations[i] holds the (i + 1)th tile
-			int tileNumber = Integer.parseInt(tileLocations[i]);
-			
-			//now, check the location of this tile
-			if (x >= pWidth) {
-				//reset x to 0 and go to next row (increase y by 1)
-				x = 0;
-				y++;
-			}
-			
-			puzzleGrid[x][y] = tileNumber;
-			x++;
-		}
-		
-		return puzzleGrid;
 	}
 }
