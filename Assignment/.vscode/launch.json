@@ -11,7 +11,7 @@
             "request": "launch",
             "args": 
             [
-                "test_genericKB.txt", "TT"
+                "test_genericKB.txt", "BC"
             ], 
             "mainClass": "${file}"
         },

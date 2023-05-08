@@ -26,10 +26,18 @@ return (TT-C HECK -A LL (KB, α, rest, model ∪ {P = true}) and
 public class TruthTable extends CheckingMethod {
 	// this is here for ease of testing and will be removed later.
 	// constructor
-	public TruthTable(String KBString, String Query )
+	public TruthTable()//(String KBString, String Query) please don't add any parameters here, they are for the Solve() function
 	{	// I am not sure what these 2 things are doing. Can you explain when you see this. thanks.
+
+		// I added some explaination
+		// the CheckingMethod.java has an explaination commented there too
+
+
+
 		code = "TT";
+		// the code is the input name to be used when using the command prompt
 		longName = "Truth Table";
+		// the longName is just the full name, to be used if you want to print the name of the check method being run
 	}
 
 	public static boolean TTEntails(String KBString, String Alpha)

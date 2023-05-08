@@ -11,7 +11,7 @@ class InferenceEngine
 {
 
 	//the number of methods programmed into nPuzzler
-	public static final int METHOD_COUNT = 3;
+	public static final int METHOD_COUNT = 2;
 	//public static nPuzzle gPuzzle;
 	public static CheckingMethod[] lMethods;
 
@@ -68,9 +68,10 @@ class InferenceEngine
 	private static void InitMethods()
 	{
 		lMethods = new CheckingMethod[METHOD_COUNT];
-		lMethods[0] = new TruthTable();
-		lMethods[1] = new ForwardChain();
-		lMethods[2] = new BackwardsChain();
+		lMethods[0] = new ForwardChain();
+		lMethods[1] = new BackwardsChain();
+		//lMethods[2] = new TruthTable();
+
 	}
 	
 	private static String readProblemFile(String fileName) // this allow only one puzzle to be specified in a problem file 
@@ -83,10 +84,41 @@ class InferenceEngine
 			BufferedReader puzzle = new BufferedReader(reader);
 			//string result;
 
-			String TELL = puzzle.readLine();
-			String KBinput = puzzle.readLine();
-			String ASK = puzzle.readLine();
-			String checkInput = puzzle.readLine();
+			List<String> TELLList;// = new ArrayList<>();
+
+			String KBinput = null;
+			String checkInput = null;
+			int i = 100;
+			String currentLine;
+			while(i > 0)
+			{
+				i++;
+				currentLine = puzzle.readLine();//.trim();
+				if (currentLine == "TELL" && KBinput != null)
+				{
+					KBinput = puzzle.readLine();
+					//TELLList = ParseTell(KBinput);
+				}
+
+				if (currentLine == "ASK" && checkInput != null)
+				{
+					checkInput = puzzle.readLine().trim();
+				}
+			}
+
+			
+			//String TELL = puzzle.readLine();
+			//String ASK = puzzle.readLine();
+
+			if (KBinput != null && checkInput != null)
+			{
+				//
+			}
+			else 
+			{
+				System.out.println("Could not find TELL or ASK line, please reformat the file");
+				System.exit(1);
+			}
 			
 			//String puzzleDimension = puzzle.readLine();
 			////split the string by letter "x"
@@ -111,7 +143,7 @@ class InferenceEngine
 			////create the nPuzzle object...
 			//result = new nPuzzle(startPuzzleGrid, goalPuzzleGrid);
 
-			result = TELL + KBinput + ASK + checkInput;
+			result = KBinput + checkInput;
 						
 			puzzle.close();
 			
@@ -131,6 +163,19 @@ class InferenceEngine
 			System.exit(1);
 		}
 		return result;
+	}
+
+
+	private static List<String> ParseTell(String TELLString)
+	{
+		List<String> TELLList = new ArrayList<>();
+		 String[] sections = TELLString.split(";");
+		 for(String arg : sections)
+		 {	// remove white spaces
+			 TELLList.add(arg.trim());
+		 }
+		
+		return TELLList;
 	}
 	
 	private static int[][] ParseStateString(String stateString, int[][] puzzleGrid, int pWidth)
