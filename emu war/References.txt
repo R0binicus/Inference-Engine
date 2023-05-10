@@ -1,0 +1,5 @@
+https://github.com/benp0821/TruthTableGenerator/
+https://github.com/iasjem/truth-table-java
+https://rosettacode.org/wiki/Truth_table#Java
+https://onecompiler.com/java/3vvd5gez3
+https://stackoverflow.com/questions/69912641/creating-truth-tables-for-propositional-logic-formulas
