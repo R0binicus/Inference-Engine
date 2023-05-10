@@ -15,7 +15,7 @@ public class  Logic {
 
 	}
 	// change sentences into logic statments
-	public convert(List KBString)
+	public void convert(List <String> KBString)
 	{
 		for (String logic: KBString)
 		{

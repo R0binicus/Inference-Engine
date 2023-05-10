@@ -40,11 +40,11 @@ public class TruthTable extends CheckingMethod {
 		// the longName is just the full name, to be used if you want to print the name of the check method being run
 	}
 
-	public static boolean TTEntails(String KBString, String Alpha)
+	public boolean TTEntails(String KBString, String Alpha)
 	{	// I think a is 'd' in the test
 		//symbols <-- list of probositions in kb and a
-		List<String> KB = GetPropositions(String KBString, String Alpha);
-		List<String> Symbols = GetSymbols(var KB, String Alpha)
+		List<String> KB = GetPropositions(KBString, Alpha);
+		List<String> Symbols = GetSymbols(KB, Alpha);
 		TTCheckAll(KB);
 	}
 
@@ -53,18 +53,22 @@ public class TruthTable extends CheckingMethod {
 	List<String> Symbols = new ArrayList<>();
 		for(int i = 0; i < KB.stream().count()){
 
-			string sym = KB.get(i);
+			String sym = KB.get(i);
 			// somthing about the symbols remove stuff or somthing idk. I think we will use this to constriucth the logic
-			symbols.add(sym);
+			Symbols.add(sym);
 		}
-	return symbols;
+	return Symbols;
 	}
-	private static boolean TTCheckAll(KB){
+	private static boolean TTCheckAll(List <String> KB){
 
 		while (!KB.isEmpty()){
 			// remove first item in arraylist
-			string check = KB.remove(0);
+			String check = KB.remove(0);
 		}
+		// ignore this for now
+		return true;
+
+
 
 	}
 
@@ -81,9 +85,10 @@ public class TruthTable extends CheckingMethod {
 	return KB;
 	}
 
-	Private static boolean TTCheckAll()
+	private static boolean TTCheckAll()
 	{
 		// what is true and what is false
+		return true;
 	}
 	// I assume this is where we want want our output to go.
 
