@@ -15,9 +15,12 @@ class InferenceEngine
 	//public static nPuzzle gPuzzle;
 	public static CheckingMethod[] lMethods;
 
+	static ArrayList<HornClause> ClauseList = new ArrayList<>();
+
 
 	public static void main(String[] args)
 	{
+		
 		long startTime = System.currentTimeMillis();
 		//Create method objects
 		InitMethods();
@@ -139,6 +142,12 @@ class InferenceEngine
 			//}
 
 			result = KBinput + "         " + checkInput;
+			List<String> printTest = ParseTell(KBinput);
+
+			for(String arg : printTest)
+		 	{	// remove white spaces
+				//System.out.println(arg + "    ");
+		 	}
 						
 			puzzle.close();
 			
