@@ -3,15 +3,15 @@
 
 package solver;
 
-public class HornClause extends ClauseParent {
-	
+public class HornClauseImply extends ClauseParent {
+
 	private boolean stateA;
-	private String symbolA;
+	private ClauseParent symbolA;
 	private String logic;
 	private boolean stateB;
-	private String symbolB;
+	private ClauseParent symbolB;
 	
-	public HornClause(String FirstSymbol, String LogicSymbol, String SecondSymbol){
+	public HornClauseImply(ClauseParent FirstSymbol, String LogicSymbol, ClauseParent SecondSymbol){
 		stateA = true; //represents the ~ symbol, as it's not usally there it is true
 		symbolA = FirstSymbol;
 		logic = LogicSymbol;
@@ -26,7 +26,7 @@ public class HornClause extends ClauseParent {
 
 	/** Returns the first Symbol */
 	public String getSymbolA(){
-		return symbolA;
+		return symbolA.getSymbolA();
 	}
 
 	/** Returns the significant bit */
@@ -41,7 +41,7 @@ public class HornClause extends ClauseParent {
 
 	/** Returns the first Symbol */
 	public String getSymbolB(){
-		return symbolB;
+		return symbolB.getSymbolB();
 	}
 	
 	
