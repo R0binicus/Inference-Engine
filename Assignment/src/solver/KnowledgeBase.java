@@ -3,12 +3,11 @@ package solver;
 // https://www.w3schools.com/java/java_arraylist.asp
 //https://www.w3schools.com/java/java_linkedlist.asp
 // I need this here for these lists according to internet overlord
-import java.util.ArrayList;
 import java.util.*;
 
 public class KnowledgeBase {
     // fields
-    private ArrayList<HornClause> horny = new ArrayList<HornClause>();
+    private ArrayList<String> horny = new ArrayList<String>();
     // I have seen facts as a thing in similar programs online so i think we will
     // need this
     private ArrayList<String> hornyFacts = new ArrayList<String>();
@@ -17,18 +16,26 @@ public class KnowledgeBase {
     private ArrayList<String> hornySymbols = new ArrayList<String>();
 
     // kb constructor
-    public KnowledgeBase() {
+    public KnowledgeBase(String KBtext) {
+        horny = getHorny(KBtext);
+        hornySymbols = getHorny(horny);
+        hornyFacts = getHornyFacts();
     }
 
-    public ArrayList<String> getHorny() {
-
+    // using linked lists might be easier
+    private ArrayList<String> getHorny(String KBtext) {
+        String[] colonSplit = KBtext.split(";");
+        for (String horn : colonSplit) {
+            {
+                horny.add(horn);
+            }
+            return horny;
+        }
     }
 
-    public ArrayList<String> getHornySymbols() {
+    private ArrayList<String> getHornySymbols(ArrayList horny) {
         // check if symbol is in list. if it is not add to list
-        for (HornClause hornyC : horny)
-            ;
-        { // negation
+        for (String hornyC : horny) { // negation
             if (hornyC.contains("~") && !hornySymbols.contains("~")) {
                 hornySymbols.add("~");
             } // conjunction
@@ -45,11 +52,15 @@ public class KnowledgeBase {
                 hornySymbols.add("<=>");
             }
         }
+        return hornySymbols;
     }
 
+    // this will create the list of facts / 'a' in the pseudocode
+    // this is a work in progress
     public ArrayList<String> getHornyFacts() {
         for (String hornyC : horny) {
-            if (hornyC) {
+            if (!hornyC.contains("~") || !hornyC.contains("&") || !hornyC.contains("||") || !hornyC.contains("=>")
+                    || !hornyC.contains("<=>")) {
                 hornyFacts.add(hornyC);
             }
         }
