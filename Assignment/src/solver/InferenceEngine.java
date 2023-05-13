@@ -16,7 +16,7 @@ class InferenceEngine {
 	// public static nPuzzle gPuzzle;
 	public static CheckingMethod[] lMethods;
 
-	static ArrayList<HornClause> ClauseList = new ArrayList<>();
+	static ArrayList<ClauseParent> ClauseList = new ArrayList<>();
 
 	public static void main(String[] args) {
 
@@ -87,12 +87,16 @@ class InferenceEngine {
 			String ASK = puzzle.readLine();
 			String checkInput = puzzle.readLine();
 
-			//result = KBinput + "         " + checkInput;
-			List<String> printTest = ParseTell(KBinput);
+			result = KBinput + "         " + checkInput;
+			ClauseList = ParseTell(KBinput);
+			
 
-			for (String arg : printTest) { // remove white spaces
-											// System.out.println(arg + " ");
+			System.out.println("START KB PRINTER:");
+			System.out.println(ClauseList.size());
+			for (ClauseParent clause : ClauseList) {
+				System.out.println(clause.clauseString());
 			}
+			System.out.println("END KB PRINTER:");
 
 			puzzle.close();
 
@@ -111,13 +115,24 @@ class InferenceEngine {
 		return result;
 	}
 
-	private static List<String> ParseTell(String TELLString) {
-		List<String> TELLList = new ArrayList<>();
-		String[] sections = TELLString.split(";");
-		for (String arg : sections) { // remove white spaces
-			TELLList.add(arg.trim());
-		}
+	private static ArrayList<ClauseParent> ParseTell(String TELLString) {
+		ArrayList<ClauseParent> returnList = new ArrayList<>(); //the thing to be returned
+		TELLString = TELLString.replaceAll("\\s+",""); // remove spaces
+		String[] sections = TELLString.split(";"); //split string by ;
+		for (String arg : sections) { //get each clause
+			List<String> TELLList = new ArrayList<>(); //temp list so each sentence part can be added to a list 
+			
+			String[] sections2 = arg.split("(?=(=>))"); //seperate the strings to the left of the =>
+			for (String arg2 : sections2) {
+				String[] sections3 = arg2.split("(?<=(=>))");  //seperate the strings to the right of the => SURELY i can do both of these in one regex right?
+				for (String arg3 : sections3) {
+					TELLList.add(arg3); // adds each sentence part to the temp list (the symbol (p2), logic symbol (=>) and other symbol (p3))
+				}
 
-		return TELLList;
+			}
+			ClauseParent newClause = new HornClause(TELLList.get(0), TELLList.get(1), TELLList.get(2)); //make new clause out of list elements
+			returnList.add(newClause); //add new clause to return list
+		}
+		return returnList;
 	}
 }

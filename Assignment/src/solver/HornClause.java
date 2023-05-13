@@ -3,20 +3,44 @@
 
 package solver;
 
-public class HornClause{
-	
+public class HornClause extends ClauseParent {
+
 	private boolean stateA;
-	private String symbolA;
+	private ClauseParent symbolAClass = null; private String symbolAString = null;
 	private String logic;
 	private boolean stateB;
-	private String symbolB;
+	private ClauseParent symbolBClass = null;  private String symbolBString = null;
 	
-	public HornClause(String FirstSymbol, String LogicSymbol, String SecondSymbol){
+	public HornClause(ClauseParent FirstSymbol, String LogicSymbol, ClauseParent SecondSymbol){ //Two classes as symbols
 		stateA = true; //represents the ~ symbol, as it's not usally there it is true
-		symbolA = FirstSymbol;
+		symbolAClass = FirstSymbol;
 		logic = LogicSymbol;
 		stateB = true; //represents the ~ symbol, as it's not usally there it is true
-		symbolB = SecondSymbol;
+		symbolBClass = SecondSymbol;
+	}
+
+	public HornClause(String FirstSymbol, String LogicSymbol, String SecondSymbol){  //Two Strings as symbols
+		stateA = true; 
+		symbolAString = FirstSymbol;
+		logic = LogicSymbol;
+		stateB = true; 
+		symbolBString = SecondSymbol;
+	}
+
+	public HornClause(ClauseParent FirstSymbol, String LogicSymbol, String SecondSymbol){  //One class and one string as symbols
+		stateA = true; 
+		symbolAClass = FirstSymbol;
+		logic = LogicSymbol;
+		stateB = true; 
+		symbolBString = SecondSymbol;
+	}
+
+	public HornClause(String FirstSymbol, String LogicSymbol, ClauseParent SecondSymbol){  //One string and one class as symbols
+		stateA = true; 
+		symbolAString = FirstSymbol;
+		logic = LogicSymbol;
+		stateB = true; 
+		symbolBClass = SecondSymbol;
 	}
 	
 	/** Returns the first binary state */
@@ -25,9 +49,8 @@ public class HornClause{
 	}
 
 	/** Returns the first Symbol */
-	public String getSymbolA(){
-		return symbolA;
-	}
+	public ClauseParent getSymbolAClass(){ return symbolAClass; } 			//Get symbol A if it is a class
+	public String getSymbolAString(){ return symbolAString; } 				//Get symbol A if it is a String
 
 	/** Returns the significant bit */
 	public String getSigBit(){
@@ -40,9 +63,8 @@ public class HornClause{
 	}
 
 	/** Returns the first Symbol */
-	public String getSymbolB(){
-		return symbolB;
-	}
+	public ClauseParent getSymbolBClass(){ return symbolBClass; } 			//Get symbol B if it is a class
+	public String getSymbolBString(){ return symbolBString; }   			//Get symbol B if it is a String
 	
 	
 	
@@ -68,28 +90,55 @@ public class HornClause{
 	 * gets the whole clause and returns it as a string (like how it was inputted).     Used for debug purposes
 	 */
 	public String clauseString(){
-		String returnString;
+		String returnString = "";
 
-		if (stateA == false)
+		if (stateA == false) // if first part has the not symbol ~
 		{
-			returnString = "~" + symbolA + " ";
+			if (symbolAClass != null) // if the first symbol is a class
+			{
+				returnString += "~" + symbolAClass.clauseString() + " ";
+			}
+			else  // if the first symbol is a string
+			{
+				returnString += "~" + symbolAString + " ";
+			}
 		}
 		else
 		{
-			returnString = symbolA + " ";
+			if (symbolAClass != null)
+			{
+				returnString += symbolAClass.clauseString() + " ";
+			}
+			else 
+			{
+				returnString += symbolAString + " ";
+			}
 		}
 
 		returnString += logic + " ";
 
-		if (stateB == false)
+		if (stateB == false) // if first part has the not symbol ~
 		{
-			returnString += "~" + symbolB + " ";
+			if (symbolAClass != null) // if the first symbol is a class
+			{
+				returnString += "~" + symbolBClass.clauseString() + " ";
+			}
+			else // if the first symbol is a string
+			{
+				returnString += "~" + symbolBString + " ";
+			}
 		}
 		else
 		{
-			returnString += symbolB + " ";
+			if (symbolAClass != null)
+			{
+				returnString += symbolBClass.clauseString() + " ";
+			}
+			else 
+			{
+				returnString += symbolBString + " ";
+			}
 		}
-
 		return returnString;
 	}
 }

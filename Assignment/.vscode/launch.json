@@ -11,7 +11,7 @@
             "request": "launch",
             "args": 
             [
-                "test_HornKB.txt", "BC"
+                "test_TestKB.txt", "BC"
             ], 
             "mainClass": "${file}"
         },
