@@ -87,58 +87,7 @@ class InferenceEngine {
 			String ASK = puzzle.readLine();
 			String checkInput = puzzle.readLine();
 
-			// result = TELL + KBinput + ASK + checkInput;
-			//
-			// puzzle.close();
-
-			// List<String> TELLList;// = new ArrayList<>();
-			//
-			// String KBinput = null;
-			// String checkInput = null;
-			// int i = 100;
-			// String currentLine = puzzle.readLine().trim();
-			//
-			// while (currentLine != null)
-			// {
-			// String TELL = "TELL";
-			// currentLine = currentLine.trim();
-			// System.out.println(currentLine);
-			// if (currentLine == TELL)// && currentLine != null)
-			// {
-			// KBinput = puzzle.readLine();
-			// //TELLList = ParseTell(KBinput);
-			// System.out.println(KBinput);
-			// }
-			// else
-			// {
-			// System.out.println(TELL.length());
-			// System.out.println(currentLine.length());
-			// }
-			//
-			// if (currentLine == "ASK")// && currentLine != null)
-			// {
-			// checkInput = puzzle.readLine().trim();
-			// System.out.println(checkInput);
-			// }
-			// currentLine = puzzle.readLine();
-			// }
-			//
-			//
-			//// String TELL = puzzle.readLine();
-			//// String ASK = puzzle.readLine();
-			//
-			// if (KBinput != null && checkInput != null)
-			// {
-			// //
-			// }
-			// else
-			// {
-			// System.out.println("Could not find TELL or ASK line, please reformat the
-			// file");
-			// System.exit(1);
-			// }
-
-			result = KBinput + "         " + checkInput;
+			//result = KBinput + "         " + checkInput;
 			List<String> printTest = ParseTell(KBinput);
 
 			for (String arg : printTest) { // remove white spaces

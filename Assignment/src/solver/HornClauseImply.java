@@ -72,22 +72,22 @@ public class HornClauseImply extends ClauseParent {
 
 		if (stateA == false)
 		{
-			returnString = "~" + symbolA + " ";
+			returnString = "~" + symbolA.getSymbolA() + " ";
 		}
 		else
 		{
-			returnString = symbolA + " ";
+			returnString = symbolA.getSymbolA() + " ";
 		}
 
 		returnString += logic + " ";
 
 		if (stateB == false)
 		{
-			returnString += "~" + symbolB + " ";
+			returnString += "~" + symbolB.getSymbolB() + " ";
 		}
 		else
 		{
-			returnString += symbolB + " ";
+			returnString += symbolB.getSymbolB() + " ";
 		}
 
 		return returnString;

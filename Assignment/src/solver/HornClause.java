@@ -3,7 +3,7 @@
 
 package solver;
 
-public class HornClause extends ClauseParent {
+public class HornClause{
 	
 	private boolean stateA;
 	private String symbolA;
