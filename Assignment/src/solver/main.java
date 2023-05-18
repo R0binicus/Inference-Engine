@@ -12,7 +12,8 @@ class program {
         String textFile = "test_HornKB.txt";
         reader Data = new reader();
         Data.read(textFile);
-        System.out.println(Data._fact);
+        System.out.println(Data._horny);
         System.out.println(Data._query);
+        System.out.println(Data._symbols);
     }
 }
