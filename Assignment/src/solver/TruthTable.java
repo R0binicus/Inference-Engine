@@ -1,4 +1,5 @@
 package solver;
+
 import java.util.*;
 
 // https://www.freecodecamp.org/news/javascript-split-how-to-split-a-string-into-an-array-in-js/
@@ -25,77 +26,79 @@ return (TT-C HECK -A LL (KB, α, rest, model ∪ {P = true}) and
 
 public class TruthTable extends CheckingMethod {
 	// this is here for ease of testing and will be removed later.
-	// constructor
-	public TruthTable()//(String KBString, String Query) please don't add any parameters here, they are for the Solve() function
-	{	// I am not sure what these 2 things are doing. Can you explain when you see this. thanks.
+
+	ArrayList<String> _ttkb;
+
+	public void TT(List<String> horn, List<String> symbols, String query) {
+
+		var unique = getTTCount(symbols);
+		var emptyTT = generateTT(unique);
+		System.out.println(emptyTT);
+		// return _ttkb;
+	}
+
+	private ArrayList<String> getTTCount(List<String> symbols) {
+		ArrayList<String> unique = new ArrayList<String>();
+		for (String s : symbols) {
+			if (!unique.contains(s)) {
+				unique.add(s);
+			}
+		}
+		for (String me : unique) {
+			System.out.println("unique: " + me);
+		}
+		System.out.println(unique);
+
+		return unique;
+	}
+
+	private HashMap<String, List<Integer>> generateTT(List<String> unique) {
+		HashMap<String, List<Integer>> TT = new HashMap<String, List<Integer>>();
+		// +1 for the query
+		int colnum = unique.size();
+		Double power = Math.pow(2, colnum);
+		int powerInt = power.intValue();
+		// int listSize = (powerInt / colnum);
+		System.out.println("Size of each " + powerInt);
+
+		for (int i = 0; i < colnum; i++) {
+			// add data into HashMap
+			TT.put(unique.get(i), new ArrayList<Integer>(powerInt));
+		}
+		// fill facts
+		for (String s : TT.keySet()) {
+			// all parts that do not contain an and statement. The and statement is reliant
+			// on these being fileld first
+			if (!s.contains("&")) {
+				for (int i = 0; i < powerInt; i++) {
+					int num = 0;
+					var list = TT.get(s);
+					list.add(num);
+				}
+
+			}
+		}
+
+		return TT;
+	}
+
+	public TruthTable()// (String KBString, String Query) please don't add any parameters here, they
+						// are for the Solve() function
+	{ // I am not sure what these 2 things are doing. Can you explain when you see
+		// this. thanks.
 
 		// I added some explaination
 		// the CheckingMethod.java has an explaination commented there too
 
-
-
 		code = "TT";
 		// the code is the input name to be used when using the command prompt
 		longName = "Truth Table";
-		// the longName is just the full name, to be used if you want to print the name of the check method being run
+		// the longName is just the full name, to be used if you want to print the name
+		// of the check method being run
 	}
-
-	public boolean TTEntails(String KBString, String Alpha)
-	{	// I think a is 'd' in the test
-		//symbols <-- list of probositions in kb and a
-		List<String> KB = GetPropositions(KBString, Alpha);
-		List<String> Symbols = GetSymbols(KB, Alpha);
-		TTCheckAll(KB);
-	}
-
-	private List GetSymbols (List <String> KB, String Alpha){
-
-	List<String> Symbols = new ArrayList<>();
-		for(int i = 0; i < KB.stream().count()){
-
-			String sym = KB.get(i);
-			// somthing about the symbols remove stuff or somthing idk. I think we will use this to constriucth the logic
-			Symbols.add(sym);
-		}
-	return Symbols;
-	}
-	private static boolean TTCheckAll(List <String> KB){
-
-		while (!KB.isEmpty()){
-			// remove first item in arraylist
-			String check = KB.remove(0);
-		}
-		// ignore this for now
-		return true;
-
-
-
-	}
-
-	// create the list
-	private List <String> GetPropositions(String KBString, String Alpha)
-	{
-		List<String> KB = new ArrayList<>();
-		 String[] sections = KBstring.split(";");
-		 for(String arg : sections)
-		 {	// remove white spaces
-			 KB.add(arg.trim());
-		 }
-		 // return the list
-	return KB;
-	}
-
-	private static boolean TTCheckAll()
-	{
-		// what is true and what is false
-		return true;
-	}
-	// I assume this is where we want want our output to go.
-
 
 	@Override
 	public void Solve() {
 		System.out.println("The truth table just ran succesfully!");
 	}
 }
-
