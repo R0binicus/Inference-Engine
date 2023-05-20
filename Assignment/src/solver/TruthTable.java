@@ -12,7 +12,7 @@ public class TruthTable extends CheckingMethod {
 
 	HashMap<String, List<Integer>> _ttkb;
 
-	public void TT(List<String> horn, List<String> symbols, String query) {
+	public void TT(List<String> horn, List<String> symbols) {
 
 		var unique = getTTCount(symbols);
 		var TT = generateTT(unique);
