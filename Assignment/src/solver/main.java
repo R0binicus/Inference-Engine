@@ -11,13 +11,13 @@ class program {
         // this is for demonstrative purposes change X to to apropraite value and args requirments
         String textFile = "test_HornKB.txt";
         reader Data = new reader();
-        //ForwardChainPlagiarism FCP = new ForwardChainPlagiarism();
+        ForwardChainPlagiarism FCP = new ForwardChainPlagiarism();
         //ForwardChain FC = new ForwardChain();
         Data.read(textFile);
         System.out.println(Data._horny);
         System.out.println(Data._query);
         System.out.println(Data._symbols);
         //System.out.println(FCP.execute());
-        //System.out.println(FC.run(Data._horny, Data._query));
+        FCP.Solve(Data._horny, Data._query);
     }
 }

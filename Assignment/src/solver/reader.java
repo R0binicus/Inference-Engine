@@ -15,7 +15,8 @@ public class reader {
         List<String> symbols = getSymbols(horn);
         _symbols = symbols;
         _horny = horn;
-        _query = textLines.get(3).trim();
+        _query = textLines.get(3).replaceAll("\\s+","");
+        //.replaceAll("\\s+",""); removes ALL spaces
     }
 
     // read in text file
@@ -35,7 +36,7 @@ public class reader {
         List<String> col = new ArrayList(split.length);
         for (String s : split) {
             // s.replaceAll("\u00A0", "");
-            col.add(s.trim());
+            col.add(s.replaceAll("\\s+",""));
         }
         return col;
     }
@@ -45,7 +46,7 @@ public class reader {
         for (String s : horn) {
             String[] split = s.split("=>");
             for (String st : split) {
-                symbols.add(st.trim());
+                symbols.add(st.replaceAll("\\s+",""));
             }
         }
         return symbols;

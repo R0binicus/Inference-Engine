@@ -42,7 +42,7 @@ public class ForwardChain extends CheckingMethod {
 		agenda = KB;
 		// agenda:		a list of symbols, initially the symbols to be known as true
 
-		while (agenda.size() <= 0)
+		while (agenda.size() != 0)
 		// while agenda is not empty do
 		{
 			//String p = agenda.keySet().iterator().next();
@@ -117,7 +117,7 @@ public String run(List<String> KB, String Input){
 }
 	
 	@Override
-	public void Solve() {
+	public void Solve(List<String> KB, String Input) {
 		System.out.println("The forward chain just ran succesfully!");
 
 

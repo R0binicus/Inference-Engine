@@ -146,7 +146,7 @@ public class TruthTable extends CheckingMethod {
 	}
 
 	@Override
-	public void Solve() {
+	public void Solve(List<String> KB, String Input) {
 		System.out.println("The truth table just ran succesfully!");
 	}
 }

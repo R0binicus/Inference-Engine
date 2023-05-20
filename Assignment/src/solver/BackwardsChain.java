@@ -10,7 +10,7 @@ public class BackwardsChain extends CheckingMethod {
 	}
 	
 	@Override
-	public void Solve() {
+	public void Solve(List<String> KB, String Input) {
 		System.out.println("The backward chain just ran succesfully!");
 	}
 }
