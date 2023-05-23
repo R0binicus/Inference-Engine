@@ -1,9 +1,9 @@
-//this is here as it might be easier yo work from this instead of having unecisary code within out current main
-//If you are okay to work with this please adjust to the current needs
 package solver;   
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;
+//this is here as it might be easier yo work from this instead of having unecisary code within out current main
+//If you are okay to work with this please adjust to the current needs
    
 class program {
 
@@ -18,7 +18,15 @@ class program {
         System.out.println(Data._symbols);
 
         // For testing the Forward Chaining Method
-        ForwardChain FC = new ForwardChain();
-        FC.Solve(Data._horny, Data._query);
+        //ForwardChain FC = new ForwardChain();
+        //FC.Solve(Data._horny, Data._query);
+
+        // For testing the Backward Chaining Method
+        BackwardsChain BC = new BackwardsChain();
+        //System.out.println(BC.MakeString());
+
+        //BackwardsChain BC = new BackwardsChain();
+        BC.Solve(Data._horny, Data._query);
+        
     }
 }
