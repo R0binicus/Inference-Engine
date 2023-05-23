@@ -5,82 +5,57 @@ import java.util.*;
 
 public class SolveTT {
     String result;
+    Stack<String> steps = new Stack<String>();
 
+    // new version of TTSolver. I am currently trying to constuct a list of the
+    // requred steps to solve the query. expected: [p1=>d ,p3 => p1 ,p2=> p3]
+    // I am still wokring on this but any input is apreciated
+    // assumption is that we will loop throgh the lsit splittng the left side to
+    // determin the right.
+    // also probably do not need to use a stack
     public void TTsolve(HashMap<String, List<Integer>> kb, String query, List<String> horny) {
-        var hornyMap = hornyMap(kb, horny);
-        // might not need this q
-        var q = queryMap(query, hornyMap);
-        var result = solveQuery(hornyMap, query);
-        // System.out.println(hornyMap);
-        // System.out.println(q);
+        requiredSteps(query, horny);
 
     }
 
-    private HashMap<String, List<Integer>> queryMap(String query, HashMap<String, List<Integer>> hornymap) {
-        HashMap<String, List<Integer>> querymap = new HashMap<String, List<Integer>>();
-        querymap.put(query, new ArrayList<Integer>());
-        return querymap;
-    }
-
-    private HashMap<String, List<Integer>> hornyMap(HashMap<String, List<Integer>> kb, List<String> horny) {
-        HashMap<String, List<Integer>> hornymap = new HashMap<String, List<Integer>>();
-
-        int TTsize = (int) Math.pow(2, kb.size());
-
+    public void requiredSteps(String query, List<String> horny) {
+        String goal = query;
         for (String s : horny) {
-            hornymap.put(s, new ArrayList<Integer>());
-        }
-        // works up to here I know for sure
-        for (String s : hornymap.keySet()) {
-            System.out.println("Selected: " + s);
-            var list = hornymap.get(s);
-            if (s.contains("=>")) {
-                // split and compare
-                String[] implicaiton = s.split("=>");
-                var left = implicaiton[0].replaceAll("\\s+", "");
-                var right = implicaiton[1].replaceAll("\\s+", "");
-
-                var selectLeft = kb.get(left);
-                var selectRight = kb.get(right);
-                // get via key
-
-                for (int i = 0; i < TTsize; i++) {
-                    if (selectLeft.get(i) == 1 && selectRight.get(i) == 0) {
-                        list.add(0);
-                        // add 0 - false
-                    } else {
-                        // all other outcomes result in true unless there is a null
-                        list.add(1);
-                    }
-                }
-                // compare each side based on implication logic
-            } else if (!s.contains("=>")) {
-                for (int i = 0; i < TTsize; i++) {
-                    var x = kb.get(s);
-                    list.add(x.get(i));
-                }
-                // fill
+            if (s.contains(goal)) {
+                steps.push(s);
             }
-            System.out.println("Selected: " + s + " Count " + list.size());
         }
-        return hornymap;
+        System.out.println(steps);
+
+        var parts = spliter(steps.peek());
+        // begin split process
+        System.out.println(parts[0]);
+        // test for next action
+        goal = parts[0];
+        var value = loopMe(goal, horny);
+        steps.push(value);
+        System.out.println(steps);
     }
 
-    private String solveQuery(HashMap<String, List<Integer>> hornyMap, String query) {
-        String answer = "Result Test: ";
-        List<Integer> select = new ArrayList<>();
-        for (String s : hornyMap.keySet()) {
-            if (s.contains(query)) {
-                System.out.println(s);
-                select = hornyMap.get(s);
-                System.out.println(select);
+    private String loopMe(String goal, List<String> horny) {
+        String stringy = "";
+        for (String s : horny) {
+            var key = spliter(s);
+            String check = key[1];
+            if (check.equals(goal)) {
+                stringy = s;
+                System.out.println(steps);
+                break;
             }
         }
-        Integer sum = 0;
-        for (Integer i : select) {
-            sum += i;
+        return stringy;
+    }
+
+    private String[] spliter(String goal) {
+        String[] banana = goal.split("=>");
+        for (String s : banana) {
+            s.trim();
         }
-        System.out.println(sum);
-        return answer;
+        return banana;
     }
 }
