@@ -39,7 +39,8 @@ public class ForwardChain extends CheckingMethod {
 		clauses  = new ArrayList<String>();
 	}
 
-	public String MakeString(String query){
+	public String MakeString(String query)
+	{
 		String returnString = "";
 		if (Entails(query) == true)
 		{
