@@ -3,11 +3,8 @@ import java.util.*;
 
 public class BackwardsChain extends CheckingMethod {
 
-	public static String tell;
-	public static String ask;
-
 	public static ArrayList<String> facts;
-	public static ArrayList<String> entailed;
+	public static ArrayList<String> inferred;
 	public static ArrayList<String> agenda;
 	public static ArrayList<String> clauses;
 	
@@ -17,90 +14,69 @@ public class BackwardsChain extends CheckingMethod {
 		longName = "Backwards Chain";
 
 		facts  = new ArrayList<String>();
-		entailed  = new ArrayList<String>();
+		inferred  = new ArrayList<String>();
 		agenda  = new ArrayList<String>();
 		clauses  = new ArrayList<String>();
-
-		tell = "p2=>p3;p3=>p1;c=>e;b&e=>f;f&g=>h;p1=>d;p1&p3=>c;a;b;p2;";
-		ask = "d";
-	}
-
-	public static void init(String tell)
-	{
-		init(tell);
-		agenda.add(ask);
-	  	String[] sentences = tell.split(";");
-		for (int i=0;i<sentences.length;i++)
-		{
-			if (!sentences[i].contains("=>")) 
-			{
-				facts.add(sentences[i]);
-			}
-			else
-			{
-				clauses.add(sentences[i]);
-			}
-		}
 	}
 	
 	public String MakeString()
 	{
 		String output = "";
 	
-		if (bcentails())
+		if (Entails() == true)
 		{
 			output = "YES: ";
-			for (int i=entailed.size()-1;i>=0;i--)
+			for (int i=inferred.size()-1;i>=0;i--)
 			{
 				if (i==0)
 				{
-					output += entailed.get(i);
+					output += inferred.get(i);
 				}
 				else
 				{
-					output += entailed.get(i)+", ";
+					output += inferred.get(i)+", ";
 				}
 			}
 		}
 		else
 		{
-				output = "NO";
+			output = "NO";
 		}
 		return output;		
 	}
 	
-	public boolean bcentails()
+	public boolean Entails()
 	{
 		while(!agenda.isEmpty())
 		{
-			String q = agenda.remove(agenda.size()-1);
-			entailed.add(q);
+			String p = agenda.remove(agenda.size()-1);
+			inferred.add(p);
 		
-			if (!facts.contains(q))
+			if (!facts.contains(p))
 			{
-				ArrayList<String> p = new ArrayList<String>();
+				ArrayList<String> symbolsList = new ArrayList<String>();
 				for(int i=0;i<clauses.size();i++)
 				{
-					if (conclusionContains(clauses.get(i),q))
+					if (PremiseContains(clauses.get(i),p))
 					{
 						ArrayList<String> temp = getPremises(clauses.get(i));
-						for(int j=0;j<temp.size();j++)
+						for(int x=0;x<temp.size();x++)
 						{
-							p.add(temp.get(j));
+							symbolsList.add(temp.get(x));
 						}
 					}						
 				}
 
-				if (p.size()==0){
+				if (symbolsList.size()==0){
 					return false;
 				}
 				else
 				{
-					for(int i=0;i<p.size();i++)
+					for(int i=0;i<symbolsList.size();i++)
 					{
-						if (!entailed.contains(p.get(i)))
+						if (!inferred.contains(symbolsList.get(i)))
 						{
-							agenda.add(p.get(i));
+							agenda.add(symbolsList.get(i));
 						}
 					}	
 				}
@@ -125,10 +101,10 @@ public class BackwardsChain extends CheckingMethod {
 	}
 	
 
-	public static boolean conclusionContains(String clause, String c)
+	public static boolean PremiseContains(String clause, String p)
 	{
 		String conclusion = clause.split("=>")[1];
-		if (conclusion.equals(c))
+		if (conclusion.equals(p))
 		{
 			return true;
 		}
