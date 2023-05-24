@@ -8,8 +8,13 @@ import java.nio.file.*;
 class program {
 
     public static void main(String[] args) {
-        // this is for demonstrative purposes change X to to apropraite value and args requirments
-        String textFile = "test_HornKB.txt";
+        if (args.length < 2) {
+			System.out.println("Usage: Inference Engine <search-method> <filename>.");
+			System.exit(1);
+		}
+        
+
+        String textFile = args[1];
         reader Data = new reader();
         
         Data.read(textFile);
@@ -19,11 +24,28 @@ class program {
 
         // For testing the Forward Chaining Method
         ForwardChain FC = new ForwardChain();
-        FC.Solve(Data._horny, Data._query);
+        //FC.Solve(Data._horny, Data._query);
 
         // For testing the Backward Chaining Method
         BackwardsChain BC = new BackwardsChain();
-        BC.Solve(Data._horny, Data._query);
-        
+        //BC.Solve(Data._horny, Data._query);
+
+        // For testing the Backward Chaining Method
+        SolveTT TT = new SolveTT();
+        //BC.Solve(Data._horny, Data._query);
+
+        String method = args[0];
+
+        // determine which method the user wants to use to solve the puzzles
+
+		if (FC.code.compareTo(method) == 0) {
+            FC.Solve(Data._horny, Data._query);
+		}
+        else if (BC.code.compareTo(method) == 0) {
+            BC.Solve(Data._horny, Data._query);
+		}
+        else if (FC.code.compareTo(method) == 0) {
+            
+		}
     }
 }
