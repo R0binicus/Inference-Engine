@@ -13,9 +13,9 @@ class program {
         reader Data = new reader();
         
         Data.read(textFile);
-        System.out.println("Input String : " + Data._horny);
-        System.out.println("Input Query : " + Data._query);
-        System.out.println("Symbols used : " + Data._symbols);
+        System.out.println("Input String:   " + Data._horny);
+        System.out.println("Input Query:    " + Data._query);
+        System.out.println("Symbols used:   " + Data._symbols);
 
         // For testing the Forward Chaining Method
         ForwardChain FC = new ForwardChain();

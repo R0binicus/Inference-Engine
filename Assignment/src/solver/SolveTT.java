@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class SolveTT {
+    public String code = "TT";
+    public String longName = "Truth Table";
     String result;
     private Stack<String> steps = new Stack<String>();
 
