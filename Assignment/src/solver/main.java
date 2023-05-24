@@ -33,7 +33,8 @@ class program {
         SolveTT TT = new SolveTT();
         // BC.Solve(Data._horny, Data._query);
 
-        String method = args[0];
+        // best practice to avoid case sensitivity
+        String method = args[0].toLowerCase();
 
         // determine which method the user wants to use to solve the puzzles
 
