@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class SolveTT {
-    public String code = "tt";
+    public String code = "TT";
     public String longName = "Truth Table";
     String result;
     private Stack<String> steps = new Stack<String>();
@@ -83,17 +83,17 @@ public class SolveTT {
 
             for (int i = 0; i < valuesLeft.size(); i++) {
                 if (valuesLeft.get(i).equals(0) && valuesRight.get(i).equals(0)) {
-                    //logic.put(action, 1);
+                    logic.put(action, 1);
 
                 }
                 if (valuesLeft.get(i).equals(0) && valuesRight.get(i).equals(1)) {
-                    //logic.put(action, 1);
+                    logic.put(action, 1);
                 }
                 if (valuesLeft.get(i).equals(1) && valuesRight.get(i).equals(0)) {
-                    //logic.put(action, 0);
+                    logic.put(action, 0);
                 }
                 if (valuesLeft.get(i).equals(1) && valuesRight.get(i).equals(1)) {
-                    //logic.put(action, 1);
+                    logic.put(action, 1);
                 }
             }
         }

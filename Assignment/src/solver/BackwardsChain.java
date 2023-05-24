@@ -13,7 +13,7 @@ public class BackwardsChain extends CheckingMethod {
 	
 	public BackwardsChain()
 	{
-		code = "BC";
+		code = "bc";
 		longName = "Backwards Chain";
 
 		facts  = new ArrayList<String>();

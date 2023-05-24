@@ -26,6 +26,7 @@ public class reader {
             lines = Files.readAllLines(Paths.get(textFile));
         } catch (IOException exception) {
             exception.printStackTrace();
+            System.out.println("Error");
         }
         return lines;
     }

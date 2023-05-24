@@ -30,7 +30,7 @@ public class ForwardChain extends CheckingMethod {
 	
 	public ForwardChain()
 	{
-		code = "FC";
+		code = "fc";
 		longName = "Forward Chain";
 
 		count  = new ArrayList<Integer>();

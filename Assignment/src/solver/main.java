@@ -6,7 +6,7 @@ import java.nio.file.*;
 //this is here as it might be easier yo work from this instead of having unecisary code within out current main
 //If you are okay to work with this please adjust to the current needs
 
-class program {
+class main {
 
     public static void main(String[] args) {
         if (args.length < 2) {
@@ -45,5 +45,6 @@ class program {
         } else if (FC.code.compareTo(method) == 0) {
 
         }
+        System.exit(0);
     }
 }

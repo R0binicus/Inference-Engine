@@ -16,9 +16,9 @@
         },
         {
             "type": "java",
-            "name": "program",
+            "name": "main",
             "request": "launch",
-            "mainClass": "solver.program",
+            "mainClass": "solver.main",
             "projectName": "Assignment_fed410b"
         }
     ]
