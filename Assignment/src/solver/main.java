@@ -13,19 +13,16 @@ class program {
         reader Data = new reader();
         
         Data.read(textFile);
-        System.out.println(Data._horny);
-        System.out.println(Data._query);
-        System.out.println(Data._symbols);
+        System.out.println("Input String : " + Data._horny);
+        System.out.println("Input Query : " + Data._query);
+        System.out.println("Symbols used : " + Data._symbols);
 
         // For testing the Forward Chaining Method
-        //ForwardChain FC = new ForwardChain();
-        //FC.Solve(Data._horny, Data._query);
+        ForwardChain FC = new ForwardChain();
+        FC.Solve(Data._horny, Data._query);
 
         // For testing the Backward Chaining Method
         BackwardsChain BC = new BackwardsChain();
-        //System.out.println(BC.MakeString());
-
-        //BackwardsChain BC = new BackwardsChain();
         BC.Solve(Data._horny, Data._query);
         
     }

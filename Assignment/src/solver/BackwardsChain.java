@@ -62,7 +62,8 @@ public class BackwardsChain extends CheckingMethod {
 				}
 			}
 		}
-		else{
+		else
+		{
 				output = "NO";
 		}
 		return output;		
@@ -156,4 +157,3 @@ public class BackwardsChain extends CheckingMethod {
 		System.out.println(MakeString());
 	}
 }
-
