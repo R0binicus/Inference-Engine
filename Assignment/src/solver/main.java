@@ -1,11 +1,5 @@
 package solver;
 
-import java.io.*;
-import java.util.*;
-import java.nio.file.*;
-//this is here as it might be easier yo work from this instead of having unecisary code within out current main
-//If you are okay to work with this please adjust to the current needs
-
 class main {
 
     public static void main(String[] args) {

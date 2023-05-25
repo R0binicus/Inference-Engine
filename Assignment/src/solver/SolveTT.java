@@ -1,6 +1,5 @@
 package solver;
 
-import java.io.*;
 import java.util.*;
 
 public class SolveTT {
@@ -24,18 +23,17 @@ public class SolveTT {
         }
         System.out.println(steps);
 
-        var parts = spliter(steps.peek());
+        String[] parts = spliter(steps.peek());
         // begin split process
         // System.out.println(parts[0]);
         // test for next action
         goal = parts[0];
-        var value = loopMe(goal, horny);
+        String value = loopMe(goal, horny);
         steps.push(value);
         // test
         System.out.println(steps);
 
-        // yes I am hardcoding this. Right now the important thing is having an output.
-        // it does not need to be correct but an output is better than no output
+        // yes I am hardcoding this.
         parts = spliter(steps.peek());
         goal = parts[0];
         value = loopMe(goal, horny);
@@ -48,7 +46,7 @@ public class SolveTT {
     private String loopMe(String goal, List<String> horny) {
         String stringy = "";
         for (String s : horny) {
-            var key = spliter(s);
+            String[] key = spliter(s);
             String check = key[1];
             if (check.equals(goal)) {
                 stringy = s;
@@ -76,24 +74,24 @@ public class SolveTT {
         while (!steps.empty()) {
             String action = steps.pop();
 
-            var values = spliter(action);
+            String[] values = spliter(action);
 
             List<Integer> valuesLeft = kb.get(values[0]);
             List<Integer> valuesRight = kb.get(values[1]);
 
             for (int i = 0; i < valuesLeft.size(); i++) {
                 if (valuesLeft.get(i).equals(0) && valuesRight.get(i).equals(0)) {
-                    //logic.put(action, 1);
+                    // logic.put(action, 1);
 
                 }
                 if (valuesLeft.get(i).equals(0) && valuesRight.get(i).equals(1)) {
-                    //logic.put(action, 1);
+                    // logic.put(action, 1);
                 }
                 if (valuesLeft.get(i).equals(1) && valuesRight.get(i).equals(0)) {
-                    //logic.put(action, 0);
+                    // logic.put(action, 0);
                 }
                 if (valuesLeft.get(i).equals(1) && valuesRight.get(i).equals(1)) {
-                    //logic.put(action, 1);
+                    // logic.put(action, 1);
                 }
             }
         }

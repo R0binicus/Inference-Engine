@@ -2,11 +2,6 @@ package solver;
 
 import java.util.*;
 
-// https://www.freecodecamp.org/news/javascript-split-how-to-split-a-string-into-an-array-in-js/
-// https://www.w3schools.com/java/java_arraylist.asp
-// https://www.geeksforgeeks.org/array-get-method-in-java/
-// https://www.appsdeveloperblog.com/java-stream-count-operation/
-
 public class TruthTable extends CheckingMethod {
 	// this is here for ease of testing and will be removed later.
 
@@ -14,8 +9,8 @@ public class TruthTable extends CheckingMethod {
 
 	public void TT(List<String> horn, List<String> symbols) {
 
-		var unique = getTTCount(symbols);
-		var TT = generateTT(unique);
+		ArrayList<String> unique = getTTCount(symbols);
+		HashMap<String, List<Integer>> TT = generateTT(unique);
 		// System.out.println(TT);
 		_ttkb = TT;
 		// return _ttkb;
@@ -55,7 +50,7 @@ public class TruthTable extends CheckingMethod {
 		for (String s : TT.keySet()) {
 			// all parts that do not contain an and statement. The and statement is reliant
 			// on these being fileld first
-			var list = TT.get(s);
+			List<Integer> list = TT.get(s);
 			if (!s.contains("&")) {
 				// alter this to be every combination
 				for (int i = 0; i < rowcount; i++) {
@@ -99,9 +94,9 @@ public class TruthTable extends CheckingMethod {
 				String right = and[1].trim();
 				// test table selection
 				// System.out.println("left: " + left + " Right: " + right);
-				var self = TT.get(s);
-				var leftcol = TT.get(left);
-				var rightcol = TT.get(right);
+				List<Integer> self = TT.get(s);
+				List<Integer> leftcol = TT.get(left);
+				List<Integer> rightcol = TT.get(right);
 				// check if there is a null list. Will assume that in the case of a null list
 				// the value is false
 				if (leftcol == null || rightcol == null) {

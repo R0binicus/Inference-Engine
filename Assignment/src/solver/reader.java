@@ -1,4 +1,5 @@
 package solver;
+
 import java.io.*;
 import java.util.*;
 import java.nio.file.*;
@@ -15,8 +16,7 @@ public class reader {
         List<String> symbols = getSymbols(horn);
         _symbols = symbols;
         _horny = horn;
-        _query = textLines.get(3).replaceAll("\\s+","");
-        //.replaceAll("\\s+",""); removes ALL spaces
+        _query = textLines.get(3).replaceAll("\\s+", "");
     }
 
     // read in text file
@@ -37,7 +37,7 @@ public class reader {
         List<String> col = new ArrayList(split.length);
         for (String s : split) {
             // s.replaceAll("\u00A0", "");
-            col.add(s.replaceAll("\\s+",""));
+            col.add(s.replaceAll("\\s+", ""));
         }
         return col;
     }
@@ -47,7 +47,7 @@ public class reader {
         for (String s : horn) {
             String[] split = s.split("=>");
             for (String st : split) {
-                symbols.add(st.replaceAll("\\s+",""));
+                symbols.add(st.replaceAll("\\s+", ""));
             }
         }
         return symbols;
