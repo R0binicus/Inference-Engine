@@ -2,7 +2,7 @@ package solver;
 
 import java.util.*;
 
-public class TruthTable extends CheckingMethod {
+public class TruthTable {
 	// this is here for ease of testing and will be removed later.
 
 	HashMap<String, List<Integer>> _ttkb;
@@ -16,7 +16,13 @@ public class TruthTable extends CheckingMethod {
 		// return _ttkb;
 	}
 
-	private ArrayList<String> getTTCount(List<String> symbols) {
+	public void printColNum() {
+		for (String s : _ttkb.keySet()) {
+			System.out.println("Table Key: " + s + " Column Count: " + _ttkb.get(s).size());
+		}
+	}
+
+	public ArrayList<String> getTTCount(List<String> symbols) {
 		ArrayList<String> unique = new ArrayList<String>();
 		for (String s : symbols) {
 			if (!unique.contains(s)) {
@@ -28,7 +34,7 @@ public class TruthTable extends CheckingMethod {
 		 * System.out.println("unique: " + me);
 		 * }
 		 */
-		System.out.println(unique);
+		// System.out.println(unique);
 
 		return unique;
 	}
@@ -117,31 +123,8 @@ public class TruthTable extends CheckingMethod {
 			}
 		}
 		// before table is returned test table count
-		/*
-		 * for (String s : TT.keySet()) {
-		 * System.out.println(s + " " + TT.get(s).size());
-		 * }
-		 */
+
 		return TT;
 	}
 
-	public TruthTable()// (String KBString, String Query) please don't add any parameters here, they
-						// are for the Solve() function
-	{ // I am not sure what these 2 things are doing. Can you explain when you see
-		// this. thanks.
-
-		// I added some explaination
-		// the CheckingMethod.java has an explaination commented there too
-
-		code = "TT";
-		// the code is the input name to be used when using the command prompt
-		longName = "Truth Table";
-		// the longName is just the full name, to be used if you want to print the name
-		// of the check method being run
-	}
-
-	@Override
-	public void Solve(List<String> KB, String Input) {
-		System.out.println("The truth table just ran succesfully!");
-	}
 }

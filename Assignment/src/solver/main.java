@@ -10,11 +10,6 @@ class main {
         String textFile = args[1];
         reader Data = new reader();
 
-        Data.read(textFile);
-        System.out.println("Input String:   " + Data._horny);
-        System.out.println("Input Query:    " + Data._query);
-        System.out.println("Symbols used:   " + Data._symbols);
-
         // For testing the Forward Chaining Method
         ForwardChain FC = new ForwardChain();
         // FC.Solve(Data._horny, Data._query);
@@ -23,9 +18,13 @@ class main {
         BackwardsChain BC = new BackwardsChain();
         // BC.Solve(Data._horny, Data._query);
 
-        // For testing the Backward Chaining Method
-        SolveTT TT = new SolveTT();
-        // BC.Solve(Data._horny, Data._query);
+        // for testing the truth table
+        TruthTable TT = new TruthTable();
+
+        Data.read(textFile);
+        System.out.println("Input String:   " + Data._horny);
+        System.out.println("Input Query:    " + Data._query);
+        System.out.println("Symbols used:   " + TT.getTTCount(Data._symbols));
 
         // best practice to avoid case sensitivity
         String method = args[0].toLowerCase();
@@ -36,7 +35,11 @@ class main {
             FC.Solve(Data._horny, Data._query);
         } else if (BC.code.compareTo(method) == 0) {
             BC.Solve(Data._horny, Data._query);
-        } else if (FC.code.compareTo(method) == 0) {
+        } else if (method.equals("tt")) {
+
+            TT.TT(Data._horny, Data._symbols);
+            // Truth table incomplete so this is the sum of each column
+            TT.printColNum();
 
         }
         System.exit(0);
