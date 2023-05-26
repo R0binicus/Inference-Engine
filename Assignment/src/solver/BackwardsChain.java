@@ -18,7 +18,8 @@ public class BackwardsChain extends CheckingMethod {
 		agenda  = new ArrayList<String>();
 		clauses  = new ArrayList<String>();
 	}
-	
+
+	// Output string from the Entailing results
 	public String MakeString()
 	{
 		String output = "";
@@ -34,7 +35,7 @@ public class BackwardsChain extends CheckingMethod {
 				}
 				else
 				{
-					output += inferred.get(i)+", ";
+					output += inferred.get(i) + ", ";
 				}
 			}
 		}
@@ -45,38 +46,50 @@ public class BackwardsChain extends CheckingMethod {
 		return output;		
 	}
 	
+	// Actual algorithm
 	public boolean Entails()
 	{
-		while(!agenda.isEmpty())
+		while(agenda.size() != 0)
+		// while agenda is not empty do
 		{
-			String p = agenda.remove(agenda.size()-1);
-			inferred.add(p);
-		
-			if (!facts.contains(p))
+			String p = agenda.remove(0);
+			// p <- POP(agenda)
+			if (facts.contains(p) == false)
+			//unless facts[p] <- true
 			{
+				inferred.add(p);
 				ArrayList<String> symbolsList = new ArrayList<String>();
-				for(int i=0;i<clauses.size();i++)
+				for(int c=0;c<clauses.size();c++)
+				// for each Horn clause c
 				{
-					if (PremiseContains(clauses.get(i),p))
+					if (PremiseContains(clauses.get(c),p))
+					// in whose premise p appears do 
 					{
-						ArrayList<String> temp = getPremises(clauses.get(i));
-						for(int x=0;x<temp.size();x++)
+						ArrayList<String> conjunct = getConjunct(clauses.get(c));
+						// for each conjunct j
+						for(int j=0;j<conjunct.size();j++)
 						{
-							symbolsList.add(temp.get(x));
+							symbolsList.add(conjunct.get(j));
+							// add conjunct to list of symbols
 						}
 					}						
 				}
 
-				if (symbolsList.size()==0){
-					return false;
-				}
-				else
+				if (symbolsList.size() == 0)
 				{
-					for(int i=0;i<symbolsList.size();i++)
+					return false;
+					// if list of symbols is empty, returns false
+				}
+				else // otherwise
+				{
+					for(int s=0;s<symbolsList.size();s++)
+					// for each symbol in the symbols list s
 					{
-						if (!inferred.contains(symbolsList.get(i)))
+						if (inferred.contains(symbolsList.get(s)) == false)
+						// if s is NOT in inferred
 						{
-							agenda.add(symbolsList.get(i));
+							agenda.add(symbolsList.get(s));
+							// add s to agenda
 						}
 					}	
 				}
@@ -85,34 +98,27 @@ public class BackwardsChain extends CheckingMethod {
 		return true;
 	}
 	
-	public static ArrayList<String> getPremises(String clause)
+	// Function get any conjunctions contained in the input clause
+	public static ArrayList<String> getConjunct(String clause)
 	{
 		String premise = clause.split("=>")[0];
-		ArrayList<String> temp = new ArrayList<String>();
+		ArrayList<String> conjunct = new ArrayList<String>();
 		String[] conjuncts = premise.split("&|\\|\\|");
 		for(int i=0;i<conjuncts.length;i++)
 		{
-			if (!agenda.contains(conjuncts[i]))
+			if (agenda.contains(conjuncts[i]) == false)
 			{
-				temp.add(conjuncts[i]);
+				conjunct.add(conjuncts[i]);
 			}
 		}
-		return temp;
+		return conjunct;
 	}
 	
-
+	// Function checks if the p string equals any subclauses in a clause
 	public static boolean PremiseContains(String clause, String p)
 	{
-		String conclusion = clause.split("=>")[1];
-		if (conclusion.equals(p))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	
+		String clauseSplit = clause.split("=>")[1];
+		return clauseSplit.equals(p);
 	}
 	
 	@Override
@@ -121,7 +127,7 @@ public class BackwardsChain extends CheckingMethod {
 		agenda.add(Query);
 		for (int i=0;i<Input.size();i++)
 		{
-			if (!Input.get(i).contains("=>")) 
+			if (Input.get(i).contains("=>") == false) 
 			{
 				facts.add(Input.get(i));
 			}

@@ -39,6 +39,7 @@ public class ForwardChain extends CheckingMethod {
 		clauses  = new ArrayList<String>();
 	}
 
+	// Output string from the Entailing results
 	public String MakeString(String query)
 	{
 		String returnString = "";
@@ -69,19 +70,19 @@ public class ForwardChain extends CheckingMethod {
 			// unless inferred[p] <- true
 			{
 				inferred.add(p);
-				for (int i=0;i<clauses.size();i++)
+				for (int c=0;c<clauses.size();c++)
 				// for each Horn clause c
 				{
-					if (PremiseContains(clauses.get(i),p))
+					if (PremiseContains(clauses.get(c),p))
 					// in whose premise p appears do 
 					{
-					Integer x = count.get(i);
-					count.set(i,--x);
+					Integer i = count.get(c);
+					count.set(c,--i);
 					// decrement count[c]
-						if (count.get(i) == 0)
+						if (count.get(c) == 0)
 						// if count[c] = 0 then do
 						{
-							String head = clauses.get(i).split("=>|<=>")[1]; // | means or 
+							String head = clauses.get(c).split("=>|<=>")[1]; // | means or 
 							if (head.equals(query))
 							// if HEAD[c] = q then return true
 							{
@@ -117,8 +118,9 @@ public class ForwardChain extends CheckingMethod {
 	public void Solve(List<String> Input, String Query)
 	{
 		//use input to make agenda, clauses and count
-		for (int i=0;i<Input.size();i++){
-			if (!Input.get(i).contains("=>")) 
+		for (int i=0;i<Input.size();i++)
+		{
+			if (Input.get(i).contains("=>") == false) 
 			{
 				agenda.add(Input.get(i));
 			}
